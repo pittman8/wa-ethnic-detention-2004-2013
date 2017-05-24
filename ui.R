@@ -27,6 +27,16 @@ shinyUI(fluidPage(
         for their freedom in court. In prison, convicts are required to work for free for big corporations without knowing it (e.g Victoria Secret, JCPenney).
         These corporations are lobbying to correctional facility owners, and lawmakers. This is a giant economic loop. By having this data analysis and visualizations,
         the public can be aware of the dark side of the system and fight for justice before someone has fallen victim to the system and wastes their entire life
-        in prison for being wrongfully convicted.")))
+        in prison for being wrongfully convicted."),
+      plotlyOutput("pie2004"),# display 2004 pie chart
+      plotlyOutput("pie2013"))), # display 2013 pie chart
+      p("As you can see from the pie charts above, there was a significant change in the percentage of people detained for some ethnicities in Washington state. The ethnicities who saw an overall
+        decrease in the overall proportion of people detained were the white ethnicity with a 10% decrease (a very significant decrease!), and the Asian & Pacific Islander and the 
+        Unknown/Other ethnicities saw a 1% decrease. However, the Hispanic population had a significant 8% increase in percentage detained of the total number of people detained in a year.
+        The black population also saw a pretty significant increase of 3% when comparing the percantages from nine years apart. Finally, the Native American proportion of detainees increased by 1% 
+        when comparing 2004 and 2013."),
+      p("These results pose significant questions to the audience and force them to consider outside factors that made these percentages decrease or increase. The fact that a significant amount of more Hispanics and African Americans 
+         and less White people were detained more recently than further in the past may reveal growing biases that the police and the justice system may consciously or subconsciously have towards these groups.")
+  
   ))
 
