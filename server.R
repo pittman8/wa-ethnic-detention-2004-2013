@@ -14,9 +14,11 @@ total.WA.pop <- read.csv('./data/added_column.csv', check.names = FALSE)
 
 # Join data sets
 all.data <- full_join(WA.detention.data, total.WA.pop, by = 'Year')
+
 # Remove unneeded columns
 all.data$Total <- NULL
 all.data$`Total Num People in WA` <- NULL
+
 # Remove percent signs
 all.data$White <- gsub("%", "", all.data$White)
 all.data$Black <- gsub("%", "", all.data$Black)
