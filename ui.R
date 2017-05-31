@@ -1,42 +1,60 @@
 library(shiny)
 library(plotly)
+library(dplyr)
 
+setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013/")
+WA.detention.data <- read.csv('./data/Ethnic_Distribution_of_Detention_Population_2004-2013.csv', check.names = FALSE)
+total.WA.pop <- read.csv('./data/added_column.csv', check.names = FALSE)
+all.data <- full_join(WA.detention.data,total.WA.pop)
+WA.data <- filter(all.data,Year %in% c('# 2004','# 2005','# 2006','# 2007','# 2008','# 2009','# 2010','# 2011','# 2012','# 2013'))
 shinyUI(fluidPage(
   titlePanel("Washington State Ethnic Detention from 2004-2013"),
-  sidebarLayout(
-    sidebarPanel(),
-    mainPanel(
-      p("This dataset is the Ethnic Distribution of Detention Population in Washington State from 2004-2013. 
-         The ethnicities used in this dataset are White, Black, Asian & Pacific Islander, Hispanic, and Other/Unknown.
-         The dataset includes the number of people of each ethnicity that was detained, as well as the percentage of the 
-         total number of people detained each year that is each ethnicity. This dataset was created by Alysa Kipersztok, 
-         and corresponds to Table 82 from the Washington State Partnership Council on Juvenile Justice (WA-PCJJ), 2014 edition, 
-         provided by the Office of Juvenile Justice. This dataset was created on December 26th, 2015 and was last updated on January 12th, 2016 from Data.WA.gov.
-         We have added our own researched information on the total number of people living in Washington from 2004-2013. This extra data was 
-         retrieved from Washington State's Office Of Financial Managements' website."), 
-      br(),
-      p("We wanted to target two specific audiences with this application and the dataset that we are using. One target audience is the 
-        Washington state justice system, or police in charge of arrests and putting people in jail. They can learn a lot from this dataset about
-        patterns that can be found amongst certain ethnicities and can base the statistics of the people they arrest on this dataset to reveal
-        any patterns or insights into who they arrest more or less. More importantly, our main target audience is the general public. The reason 
-        is that many people don't realize that the prison system in America is a massive pillar to the economy. There are many stages before a person 
-        can be convicted of a crime, proven guilty and sent to prison for rehabilitation as it should be. However, with the current system, many people 
-        are convicted of a crime and their cases end up in prosecution which offers them to plead guilty of a crime that they did not commit and serve
-        a short amount of time or take their cases to trial and if they lose the case. They serve an extensive amount of time in prison for having the 
-        audacity to challenge the system and the prosecutor in trial. These stages require money from the person who is accused of a crime and is fighting 
-        for their freedom in court. In prison, convicts are required to work for free for big corporations without knowing it (e.g Victoria Secret, JCPenney).
-        These corporations are lobbying to correctional facility owners, and lawmakers. This is a giant economic loop. By having this data analysis and visualizations,
-        the public can be aware of the dark side of the system and fight for justice before someone has fallen victim to the system and wastes their entire life
-        in prison for being wrongfully convicted."),
-      plotlyOutput("pie2004"),# display 2004 pie chart
-      plotlyOutput("pie2013"))), # display 2013 pie chart
-      p("As you can see from the pie charts above, there was a significant change in the percentage of people detained for some ethnicities in Washington state. The ethnicities who saw an overall
-        decrease in the overall proportion of people detained were the white ethnicity with a 10% decrease (a very significant decrease!), and the Asian & Pacific Islander and the 
-        Unknown/Other ethnicities saw a 1% decrease. However, the Hispanic population had a significant 8% increase in percentage detained of the total number of people detained in a year.
-        The black population also saw a pretty significant increase of 3% when comparing the percantages from nine years apart. Finally, the Native American proportion of detainees increased by 1% 
-        when comparing 2004 and 2013."),
-      p("These results pose significant questions to the audience and force them to consider outside factors that made these percentages decrease or increase. The fact that a significant amount of more Hispanics and African Americans 
-         and less White people were detained more recently than further in the past may reveal growing biases that the police and the justice system may consciously or subconsciously have towards these groups.")
-  
+  navbarPage("Navbar!",
+             tabPanel("Main",
+      fluidRow(
+        p("This dataset is the Ethnic Distribution of Detention Population in Washington State from 2004-2013. 
+           The ethnicities used in this dataset are White, Black, Asian & Pacific Islander, Hispanic, and Other/Unknown.
+           The dataset includes the number of people of each ethnicity that was detained, as well as the percentage of the 
+           total number of people detained each year that is each ethnicity. This dataset was created by Alysa Kipersztok, 
+           and corresponds to Table 82 from the Washington State Partnership Council on Juvenile Justice (WA-PCJJ), 2014 edition, 
+           provided by the Office of Juvenile Justice. This dataset was created on December 26th, 2015 and was last updated on January 12th, 2016 from Data.WA.gov.
+           We have added our own researched information on the total number of people living in Washington from 2004-2013. This extra data was 
+           retrieved from Washington State's Office Of Financial Managements' website."), 
+        br(),
+        p("We wanted to target two specific audiences with this application and the dataset that we are using. One target audience is the 
+          Washington state justice system, or police in charge of arrests and putting people in jail. They can learn a lot from this dataset about
+          patterns that can be found amongst certain ethnicities and can base the statistics of the people they arrest on this dataset to reveal
+          any patterns or insights into who they arrest more or less. More importantly, our main target audience is the general public. The reason 
+          is that many people don't realize that the prison system in America is a massive pillar to the economy. There are many stages before a person 
+          can be convicted of a crime, proven guilty and sent to prison for rehabilitation as it should be. However, with the current system, many people 
+          are convicted of a crime and their cases end up in prosecution which offers them to plead guilty of a crime that they did not commit and serve
+          a short amount of time or take their cases to trial and if they lose the case. They serve an extensive amount of time in prison for having the 
+          audacity to challenge the system and the prosecutor in trial. These stages require money from the person who is accused of a crime and is fighting 
+          for their freedom in court. In prison, convicts are required to work for free for big corporations without knowing it (e.g Victoria Secret, JCPenney).
+          These corporations are lobbying to correctional facility owners, and lawmakers. This is a giant economic loop. By having this data analysis and visualizations,
+          the public can be aware of the dark side of the system and fight for justice before someone has fallen victim to the system and wastes their entire life
+          in prison for being wrongfully convicted."),
+        plotlyOutput("pie2004"),# display 2004 pie chart
+        plotlyOutput("pie2013"), # display 2013 pie chart
+        p("As you can see from the pie charts above, there was a significant change in the percentage of people detained for some ethnicities in Washington state. The ethnicities who saw an overall
+          decrease in the overall proportino of people detained were the white ethnicity with a 10% decrease (a very significant decrease!), and the Asian & Pacific Islander and the 
+          Unknown/Other ethnicities saw a 1% decrease. However, the Hispanic population had a significant 8% increase in percentage detained of the total number of people detained in a year.
+          The black population also saw a pretty significant increase of 3% when comparing the percantages from nine years apart. Finally, the Native American proportion of detainees increased by 1% 
+          when comparing 2004 and 2013."),
+        p("These results pose significant questions to the audience and force them to consider outside factors that made these percentages decrease or increase. The fact that a significant amount of more Hispanics and African Americans 
+           and less White people were detained more recently than further in the past may reveal growing biases that the police and the justice system may consciously or subconsciously have towards these groups.")
+        )
+      ),
+      tabPanel("Chart1",
+        sidebarLayout(
+          sidebarPanel(
+               selectInput('var','Year:',WA.data$Year)#total
+          ),
+          mainPanel(
+              plotlyOutput("totalChart")
+          )
+        )
+        )
+  )
   ))
 
