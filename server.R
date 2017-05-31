@@ -53,14 +53,15 @@ shinyServer(function(input, output) {
       my.data <- mutate(WA.data,percentage = (Total/`Total Num People in WA`)*100) %>%
         select(Year,percentage)
       return(plot_ly(my.data, x= ~Year,y=~percentage,type='bar',name = 'percentage') %>%
-        layout(yaxis=list(title = 'percentage')))
+        layout(title ="percentage of detention population in WA" ,yaxis=list(title = 'percentage')))
     } else {
       my.data <- filter(WA.data, Year %in% input$var)
       total.WA <- my.data$`Total Num People in WA`
       my.data <- select(my.data,White,Black,`Native American`,`Asian & Pacific Is.`,Hispanic,`Other/Unknown`,`Total`)
       my.data <- my.data/total.WA *100
       my.data <- data.frame(t(my.data))
-      return(plot_ly(my.data, x=row.names(my.data),y=~t.my.data.,name="percentage by ethnicity",type='bar'))
+      return(plot_ly(my.data, x=row.names(my.data),y=~t.my.data.,name="percentage by ethnicity",type='bar') %>%
+               layout(title="percentage of ",yaxis = list(title = "percentage")))
     }
   })
 })

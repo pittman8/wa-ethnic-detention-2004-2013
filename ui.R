@@ -2,16 +2,16 @@ library(shiny)
 library(plotly)
 library(dplyr)
 
+setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013/")
 WA.detention.data <- read.csv('./data/Ethnic_Distribution_of_Detention_Population_2004-2013.csv', check.names = FALSE)
 total.WA.pop <- read.csv('./data/added_column.csv', check.names = FALSE)
 all.data <- full_join(WA.detention.data,total.WA.pop)
 WA.data <- filter(all.data,Year %in% c('# 2004','# 2005','# 2006','# 2007','# 2008','# 2009','# 2010','# 2011','# 2012','# 2013'))
 shinyUI(fluidPage(
   titlePanel("Washington State Ethnic Detention from 2004-2013"),
-    navbarPage("Navbar!",
-      tabPanel("Main",
+  navbarPage("Navbar!",
+             tabPanel("Main",
       fluidRow(
-      mainPanel(
         p("This dataset is the Ethnic Distribution of Detention Population in Washington State from 2004-2013. 
            The ethnicities used in this dataset are White, Black, Asian & Pacific Islander, Hispanic, and Other/Unknown.
            The dataset includes the number of people of each ethnicity that was detained, as well as the percentage of the 
@@ -35,7 +35,7 @@ shinyUI(fluidPage(
           the public can be aware of the dark side of the system and fight for justice before someone has fallen victim to the system and wastes their entire life
           in prison for being wrongfully convicted."),
         plotlyOutput("pie2004"),# display 2004 pie chart
-        plotlyOutput("pie2013"))), # display 2013 pie chart
+        plotlyOutput("pie2013"), # display 2013 pie chart
         p("As you can see from the pie charts above, there was a significant change in the percentage of people detained for some ethnicities in Washington state. The ethnicities who saw an overall
           decrease in the overall proportino of people detained were the white ethnicity with a 10% decrease (a very significant decrease!), and the Asian & Pacific Islander and the 
           Unknown/Other ethnicities saw a 1% decrease. However, the Hispanic population had a significant 8% increase in percentage detained of the total number of people detained in a year.
@@ -44,17 +44,17 @@ shinyUI(fluidPage(
         p("These results pose significant questions to the audience and force them to consider outside factors that made these percentages decrease or increase. The fact that a significant amount of more Hispanics and African Americans 
            and less White people were detained more recently than further in the past may reveal growing biases that the police and the justice system may consciously or subconsciously have towards these groups.")
         )
-    ),
-    tabPanel("plot1",
-           sidebarLayout(
-              sidebarPanel(
-               selectInput('var','Year:',WA.data$Year #add Total
-                )
-             ),
-             mainPanel(
-               plotlyOutput("totalChart")
-             )
-           )
-    )
+      ),
+      tabPanel("Chart1",
+        sidebarLayout(
+          sidebarPanel(
+               selectInput('var','Year:',WA.data$Year)#total
+          ),
+          mainPanel(
+              plotlyOutput("totalChart")
+          )
+        )
+        )
+  )
   ))
 
