@@ -2,7 +2,7 @@ library(shiny)
 library(plotly)
 library(dplyr)
 
-setwd('C:/Users/Hannah/Desktop/INFO-201/wa-ethnic-detention-2004-2013')
+#setwd('C:/Users/Hannah/Desktop/INFO-201/wa-ethnic-detention-2004-2013')
 source('./scripts/2004_pie_chart.R')
 source('./scripts/2013_pie_chart.R')
 
