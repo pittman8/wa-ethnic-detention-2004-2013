@@ -7,7 +7,7 @@ library(tidyr)
 library(plotly)
 library(broom)
 
-setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
+#setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
 
 # This function takes in data, search value(race selector), year and num of incarcereated people 
 # and generates a scatter plot with a best fit line or model curve that is an approximation of the actual population.
