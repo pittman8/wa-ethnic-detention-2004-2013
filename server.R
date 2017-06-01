@@ -1,3 +1,4 @@
+#This server file creates the data that will be showing in shiny app
 library(shiny)
 library(plotly)
 library(dplyr)
@@ -42,18 +43,21 @@ WA.data <-filter(WA.data,Year %in% c('# 2004','# 2005','# 2006','# 2007','# 2008
 WA.data[,-1] <- as.numeric(gsub(",", "", as.matrix(WA.data[,-1])))
 
 shinyServer(function(input, output) {
+  #creates the piechart from 2004 data
   output$pie2004 <- renderPlotly({
     return(Pie.2004(data.2004.flipped))
   })
+  #creates the pichart from 2013 data
   output$pie2013 <- renderPlotly({
     return(Pie.2013(data.2013.flipped))
   })
+  #creates the bargraph of detainees / total population in WA
   output$totalChart <- renderPlotly({
     if(input$var == 'Total') {
       my.data <- mutate(WA.data,percentage = (Total/`Total Num People in WA`)*100) %>%
         select(Year,percentage)
       return(plot_ly(my.data, x= ~Year,y=~percentage,type='bar',name = 'percentage') %>%
-        layout(title ="percentage of detention population in WA" ,yaxis=list(title = 'percentage')))
+        layout(title ="percentage of detainees in WA from 2004 to 2013" ,yaxis=list(title = 'percentage')))
     } else {
       my.data <- filter(WA.data, Year %in% input$var)
       total.WA <- my.data$`Total Num People in WA`
@@ -61,7 +65,7 @@ shinyServer(function(input, output) {
       my.data <- my.data/total.WA *100
       my.data <- data.frame(t(my.data))
       return(plot_ly(my.data, x=row.names(my.data),y=~t.my.data.,name="percentage by ethnicity",type='bar') %>%
-               layout(title="percentage of ",yaxis = list(title = "percentage")))
+               layout(title="percentage of detainee in WA by ethnicity",yaxis = list(title = "percentage")))
     }
   })
 })
