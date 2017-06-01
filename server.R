@@ -3,7 +3,9 @@ library(shiny)
 library(plotly)
 library(dplyr)
 
+#setwd('C:/Users/Hannah/Desktop/INFO-201/wa-ethnic-detention-2004-2013')
 setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013/")
+
 source('./scripts/2004_pie_chart.R')
 source('./scripts/2013_pie_chart.R')
 
@@ -15,9 +17,11 @@ total.WA.pop <- read.csv('./data/added_column.csv', check.names = FALSE,stringsA
 
 # Join data sets
 all.data <- full_join(WA.detention.data, total.WA.pop, by = 'Year')
+
 # Remove unneeded columns
 all.data$Total <- NULL
 all.data$`Total Num People in WA` <- NULL
+
 # Remove percent signs
 all.data$White <- gsub("%", "", all.data$White)
 all.data$Black <- gsub("%", "", all.data$Black)
@@ -53,12 +57,14 @@ shinyServer(function(input, output) {
   })
   #creates the bargraph of detainees / total population in WA
   output$totalChart <- renderPlotly({
+    #returns percentage from 2004 to 2013
     if(input$var == 'Total') {
       my.data <- mutate(WA.data,percentage = (Total/`Total Num People in WA`)*100) %>%
         select(Year,percentage)
       return(plot_ly(my.data, x= ~Year,y=~percentage,type='bar',name = 'percentage') %>%
         layout(title ="percentage of detainees in WA from 2004 to 2013" ,yaxis=list(title = 'percentage')))
     } else {
+      #returns the bargraph of percentage by ethnicity in each year
       my.data <- filter(WA.data, Year %in% input$var)
       total.WA <- my.data$`Total Num People in WA`
       my.data <- select(my.data,White,Black,`Native American`,`Asian & Pacific Is.`,Hispanic,`Other/Unknown`,`Total`)
