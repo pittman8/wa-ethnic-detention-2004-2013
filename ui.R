@@ -70,7 +70,14 @@ shinyUI(fluidPage(
                                                                                  ))
                      ),
                      mainPanel(
-                       plotlyOutput("ChangeOvTime")
+                       plotlyOutput("ChangeOvTime"), 
+                       br(),
+                       h4('Summary'),p("The overall distribution of each graph that is categorized by race shows that there is a decrease in number of incarcerated population after 2010. 
+                         This could be due to criminal justice system reforms, president Obama's pardon grants and other factors that play a role in 
+                          decreasing the number of imprisoned population."), br(),
+                          p("The standard deviation suggests a broad range of values that infer
+                          to where the actual number of people who are and have been incarcerated is. Using the best fit line or the line that smoothly 
+                          shapes the overall distribution, we can tell the exact distribution of imprisoned people.")
                      )
                    )
         )
