@@ -1,5 +1,4 @@
-#This ui file creates the structure of the shiny get
-
+#This ui file creates the structure of the shiny
 library(shiny)
 library(plotly)
 library(dplyr)
@@ -7,9 +6,6 @@ library(dplyr)
 
 # setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013")
 # setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
-
-#setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013/")
-#setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
 
 WA.detention.data <- read.csv('./data/Ethnic_Distribution_of_Detention_Population_2004-2013.csv', check.names = FALSE)
 total.WA.pop <- read.csv('./data/added_column.csv', check.names = FALSE)
@@ -54,6 +50,7 @@ shinyUI(fluidPage(
            and less White people were detained more recently than further in the past may reveal growing biases that the police and the justice system may consciously or subconsciously have towards these groups.")
         )
       ),
+    #graph based on ratio of the total WA population and detainees
       tabPanel("Percentage of detainees in WA",
         sidebarLayout(
           sidebarPanel(
@@ -75,7 +72,7 @@ shinyUI(fluidPage(
                                                                                  ))
                      ),
                      mainPanel(
-                       plotlyOutput("ChangeOvTime"), 
+                       plotlyOutput("ChangeOvTime"), #display scatterplot
                        br(),
                        h4('Summary'),p("   The overall distribution of each graph that is categorized by race shows that there is a decrease in number of incarcerated population. 
                          This could be due to criminal justice system reforms, president Obama's pardon grants and other factors that play a role in 

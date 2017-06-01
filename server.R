@@ -4,12 +4,9 @@ library(plotly)
 library(dplyr)
 library(broom)
 
-#setwd('C:/Users/Hannah/Desktop/INFO-201/wa-ethnic-detention-2004-2013')
-setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013")
+# setwd('C:/Users/Hannah/Desktop/INFO-201/wa-ethnic-detention-2004-2013')
+# setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013")
 # setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
-  #setwd("~//2nd/INFO201/wa-ethnic-detention-2004-2013/")
-  
-  #setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
 
 source('./scripts/2004_pie_chart.R')
 source('./scripts/2013_pie_chart.R')
@@ -121,7 +118,7 @@ shinyServer(function(input, output) {
                layout(title="percentage of detainee in WA by ethnicity",yaxis = list(title = "percentage")))
     }
   })
-  
+  #returns the scatterplot by ethnicity
   output$ChangeOvTime <- renderPlotly({
     return(ChangeOverTime(combined.data,input$search, 'Year','num','percent'))
   })
