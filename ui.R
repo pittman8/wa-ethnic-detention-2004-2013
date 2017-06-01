@@ -1,3 +1,5 @@
+#This ui file creates the structure of the shiny web
+
 library(shiny)
 library(plotly)
 library(dplyr)
@@ -10,8 +12,9 @@ all.data <- full_join(WA.detention.data,total.WA.pop)
 WA.data <- filter(all.data,Year %in% c('# 2004','# 2005','# 2006','# 2007','# 2008','# 2009','# 2010','# 2011','# 2012','# 2013'))
 shinyUI(fluidPage(
   titlePanel("Washington State Ethnic Detention from 2004-2013"),
+  #creates tabs in shiny
   navbarPage("Navbar!",
-             tabPanel("Main",
+    tabPanel("Main",
       fluidRow(
         p("This dataset is the Ethnic Distribution of Detention Population in Washington State from 2004-2013. 
            The ethnicities used in this dataset are White, Black, Asian & Pacific Islander, Hispanic, and Other/Unknown.
@@ -46,13 +49,16 @@ shinyUI(fluidPage(
            and less White people were detained more recently than further in the past may reveal growing biases that the police and the justice system may consciously or subconsciously have towards these groups.")
         )
       ),
-      tabPanel("Chart1",
+      tabPanel("Percentage of detainees in WA",
         sidebarLayout(
           sidebarPanel(
-               selectInput('var','Year:',WA.data$Year)#total
+               selectInput('var','Year:',list('Total','# 2013','# 2012','# 2011','# 2010','# 2009','# 2008','# 2007','# 2006','# 2005','# 2004'))
           ),
           mainPanel(
-              plotlyOutput("totalChart")
+              plotlyOutput("totalChart"),#display a bargraph
+              p("As you can see from the bar graph above, the ratio of detainees to the Washington population decreased by 0.23% between 2004 and 2013. This shows that there will be a lower percentage of detainees in Washington state in the future."),
+              br(),
+              p("Each year, White population had the highest detainee percentage in WA than other ethnicities. Followed by Hispanic, Black, and others. While the percentage of other ethnicities did not change as much, the percentage of White decreased significantly throughout past few years.")
           )
         )
         ),tabPanel("Change over time",
@@ -69,5 +75,6 @@ shinyUI(fluidPage(
                    )
         )
   )
-  ))
-
+      )
+    )
+  
