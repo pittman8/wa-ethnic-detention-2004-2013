@@ -4,8 +4,14 @@ library(shiny)
 library(plotly)
 library(dplyr)
 
+<<<<<<< HEAD
 setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013")
 # setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
+=======
+#setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013/")
+#setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
+
+>>>>>>> refs/remotes/origin/master
 WA.detention.data <- read.csv('./data/Ethnic_Distribution_of_Detention_Population_2004-2013.csv', check.names = FALSE)
 total.WA.pop <- read.csv('./data/added_column.csv', check.names = FALSE)
 all.data <- full_join(WA.detention.data,total.WA.pop)
@@ -72,12 +78,13 @@ shinyUI(fluidPage(
                      mainPanel(
                        plotlyOutput("ChangeOvTime"), 
                        br(),
-                       h4('Summary'),p("The overall distribution of each graph that is categorized by race shows that there is a decrease in number of incarcerated population after 2010. 
+                       h4('Summary'),p("   The overall distribution of each graph that is categorized by race shows that there is a decrease in number of incarcerated population. 
                          This could be due to criminal justice system reforms, president Obama's pardon grants and other factors that play a role in 
                           decreasing the number of imprisoned population."), br(),
                           p("The standard deviation suggests a broad range of values that infer
                           to where the actual number of people who are and have been incarcerated is. Using the best fit line or the line that smoothly 
-                          shapes the overall distribution, we can tell the exact distribution of imprisoned people.")
+                          shapes the overall distribution, we can tell the exact distribution of imprisoned people."),
+                       p('This analysis suggests that there is a decrease in the number of incarcerated population which is a positive change over time. However, the criminal justice system needs a major reform in terms of inmate treatment, bias sentencing, and exploitation of the free labor of inmates.')
                      )
                    )
         )
