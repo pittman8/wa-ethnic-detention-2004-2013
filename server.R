@@ -5,14 +5,11 @@ library(dplyr)
 library(broom)
 
 #setwd('C:/Users/Hannah/Desktop/INFO-201/wa-ethnic-detention-2004-2013')
-<<<<<<< HEAD
 setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013")
 # setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
-=======
-#setwd("~//2nd/INFO201/wa-ethnic-detention-2004-2013/")
-
-#setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
->>>>>>> refs/remotes/origin/master
+  #setwd("~//2nd/INFO201/wa-ethnic-detention-2004-2013/")
+  
+  #setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
 
 source('./scripts/2004_pie_chart.R')
 source('./scripts/2013_pie_chart.R')
@@ -112,7 +109,7 @@ shinyServer(function(input, output) {
       my.data <- mutate(WA.data,percentage = (Total/`Total Num People in WA`)*100) %>%
         select(Year,percentage)
       return(plot_ly(my.data, x= ~Year,y=~percentage,type='bar',name = 'percentage') %>%
-        layout(title ="percentage of detainees in WA from 2004 to 2013" ,yaxis=list(title = 'percentage')))
+               layout(title ="percentage of detainees in WA from 2004 to 2013" ,yaxis=list(title = 'percentage')))
     } else {
       #returns the bargraph of percentage by ethnicity in each year
       my.data <- filter(WA.data, Year %in% input$var)
@@ -129,4 +126,3 @@ shinyServer(function(input, output) {
     return(ChangeOverTime(combined.data,input$search, 'Year','num','percent'))
   })
 })
-

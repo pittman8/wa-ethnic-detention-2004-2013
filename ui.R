@@ -1,17 +1,16 @@
-#This ui file creates the structure of the shiny web
+#This ui file creates the structure of the shiny get
 
 library(shiny)
 library(plotly)
 library(dplyr)
 
-<<<<<<< HEAD
-setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013")
+
+# setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013")
 # setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
-=======
+
 #setwd("~/UW/2nd/INFO201/wa-ethnic-detention-2004-2013/")
 #setwd("C:/Users/Kidus/Desktop/INFO 201/Assignments/wa-ethnic-detention-2004-2013")
 
->>>>>>> refs/remotes/origin/master
 WA.detention.data <- read.csv('./data/Ethnic_Distribution_of_Detention_Population_2004-2013.csv', check.names = FALSE)
 total.WA.pop <- read.csv('./data/added_column.csv', check.names = FALSE)
 all.data <- full_join(WA.detention.data,total.WA.pop)
