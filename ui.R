@@ -48,7 +48,7 @@ shinyUI(fluidPage(
            and less White people were detained more recently than further in the past may reveal growing biases that the police and the justice system may consciously or subconsciously have towards these groups.")
         )
       ),
-      tabPanel("Percentage of detainee in WA",
+      tabPanel("Percentage of detainees in WA",
         sidebarLayout(
           sidebarPanel(
                selectInput('var','Year:',list('Total','# 2013','# 2012','# 2011','# 2010','# 2009','# 2008','# 2007','# 2006','# 2005','# 2004'))
